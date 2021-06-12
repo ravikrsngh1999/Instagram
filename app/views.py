@@ -14,7 +14,7 @@ def home(request):
             login(request,user)
             return redirect("/explore/")
         else:
-            print("Login Failed")    
+            print("Login Failed")
     return render(request,'index.html',)
 
 
@@ -42,8 +42,7 @@ def signup(request):
 
 
 
-def explore(request):
-    return HttpResponse("Login Complete")
+
 
 
 def test(request):

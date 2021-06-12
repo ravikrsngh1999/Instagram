@@ -16,11 +16,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from app import views
+from post import views as vv
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',views.home,name="home"),
     path('signup/',views.signup,name="Signup"),
     path('test/',views.test,name="test"),
-    path('explore/',views.explore,name="explore"),
+    path('explore/',vv.explore,name="explore"),
 ]
