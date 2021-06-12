@@ -11,6 +11,12 @@ def explore(request):
     if request.method == "POST":
         caption = request.POST.get('caption')
         file = request.FILES.get('file')
-        obj = Post.objects.create(caption=caption,file=file,type="image",user=request.user)
+        type = str(file).split(".")[-1]
+        img_types = ["jpg","jpeg","png"]
+        if type in img_types:
+            type = "image"
+        else:
+            type="video"
+        obj = Post.objects.create(caption=caption,file=file,type=type,user=request.user)
         return render(request,'home.html',{'obj':obj})
     return render(request,'home.html',{})

@@ -74,7 +74,13 @@
           </div>
 
           <div class="post-content">
+            {% if obj.type == "image" %}
             <img src="{{obj.file.url}}" alt="">
+            {% else %}
+            <video src="{{obj.file.url}}" autoplay muted>
+
+            </video>
+            {% endif %}
           </div>
 
           <div class="action-container">
