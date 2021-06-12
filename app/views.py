@@ -2,12 +2,19 @@ from django.shortcuts import render,redirect
 from django.http import HttpResponse,HttpResponseRedirect
 from django.contrib.auth.models import User
 from .models import *
+from django.contrib.auth import authenticate, login, logout,get_user_model
 # Create your views here.
 
 def home(request):
-    #Block of code
-    print(request.POST.get('username'))
-    print(request.POST.get('password'))
+    if request.method == "POST":
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        user = authenticate(username=username,password=password)
+        if user:
+            login(request,user)
+            return redirect("/explore/")
+        else:
+            print("Login Failed")    
     return render(request,'index.html',)
 
 
@@ -28,6 +35,16 @@ def signup(request):
         user_info_obj = UserInfo.objects.create(phone_number=phone_number,bio=bio,user=user_obj)
         return redirect("/")
     return render(request,'signup.html')
+
+
+
+
+
+
+
+def explore(request):
+    return HttpResponse("Login Complete")
+
 
 def test(request):
     if request.method == "POST":
