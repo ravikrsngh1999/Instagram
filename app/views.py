@@ -6,6 +6,8 @@ from django.contrib.auth import authenticate, login, logout,get_user_model
 # Create your views here.
 
 def home(request):
+    if request.user.is_authenticated:
+        return redirect("/explore/")
     if request.method == "POST":
         username = request.POST.get('username')
         password = request.POST.get('password')
@@ -33,9 +35,10 @@ def signup(request):
         user_obj.save()
         print(user_obj)
         user_info_obj = UserInfo.objects.create(phone_number=phone_number,bio=bio,user=user_obj)
-        return redirect("/")
+        user = authenticate(username=username,password=password)
+        login(request,user)
+        return redirect("/explore/")
     return render(request,'signup.html')
-
 
 
 def user_logout(request):
