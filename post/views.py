@@ -8,4 +8,9 @@ from django.contrib.auth.decorators import login_required
 
 @login_required(login_url="/")
 def explore(request):
+    if request.method == "POST":
+        caption = request.POST.get('caption')
+        file = request.FILES.get('file')
+        obj = Post.objects.create(caption=caption,file=file,type="image",user=request.user)
+        return render(request,'home.html',{'obj':obj})
     return render(request,'home.html',{})
