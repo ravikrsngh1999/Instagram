@@ -5,4 +5,4 @@ from .models import *
 
 # Create your views here.
 def explore(request):
-    return HttpResponse("Login Complete")
+    return render(request,'home.html',{})

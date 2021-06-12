@@ -1,9 +1,10 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
     <title>Instagram</title>
-    <link rel="stylesheet" href="css/home.css">
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Grand+Hotel&family=Lato:wght@100;300;400;700;900&display=swap" rel="stylesheet">
   </head>
@@ -17,9 +18,9 @@
         <input type="search" name="" value="" placeholder="Search">
         <div class="header-btns">
           <!-- <a href="home.html"> <img src="img/home.png" alt=""></a> -->
-          <button type="button" > <img src="img/home.png" alt=""> </button>
-          <button type="button" > <img src="img/add.png" alt=""> </button>
-          <button type="button" > <img src="img/profile.png" alt="" id="profile-btn"> </button>
+          <button type="button" > <img src="{% static 'img/home.png' %}" alt=""> </button>
+          <button type="button" > <img src="{% static 'img/add.png' %}" alt=""> </button>
+          <button type="button" > <img src="{% static 'img/profile.png' %}" alt="" id="profile-btn"> </button>
         </div>
       </div>
     </header>
@@ -30,7 +31,7 @@
         <div class="menu-box" id="menu-box">
           <a href="#">Profile</a>
           <a href="#">Saved</a>
-          <a href="#">Logout</a>
+          <a href="/user_logout">Logout</a>
 
         </div>
 
@@ -268,7 +269,7 @@
     </section>
 
 
-    <script src="js/home.js" charset="utf-8"></script>
+    <script src="{% static 'js/home.js' %}" charset="utf-8"></script>
 
   </body>
 </html>
