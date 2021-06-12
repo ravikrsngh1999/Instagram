@@ -17,6 +17,8 @@ from django.contrib import admin
 from django.urls import path
 from app import views
 from post import views as vv
+from . import settings
+from django.contrib.staticfiles.urls import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -26,3 +28,5 @@ urlpatterns = [
     path('explore/',vv.explore,name="explore"),
     path('user_logout/',views.user_logout,name="user_logout"),
 ]
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
