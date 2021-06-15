@@ -3,6 +3,7 @@ from django.http import HttpResponse,HttpResponseRedirect
 from django.contrib.auth.models import User
 from .models import *
 from django.contrib.auth import authenticate, login, logout,get_user_model
+from post.models import *
 # Create your views here.
 
 def home(request):
@@ -48,6 +49,55 @@ def user_logout(request):
 
 
 
+def profile(request):
+    print("inside profile")
+    userinfo_obj = UserInfo.objects.get(user = request.user)
+    all_posts = Post.objects.filter(user=request.user).order_by("-pk")
+    context = {
+        'userinfo_obj':userinfo_obj,
+        'all_posts':all_posts,
+    }
+    return render(request,'profile.html',context)
+
+
+def editprofile(request):
+    print("inside editprofile")
+    userinfo_obj = UserInfo.objects.get(user = request.user)
+    all_posts = Post.objects.filter(user=request.user).order_by("-pk")
+    if request.method == "POST":
+        username = request.POST.get("username")
+        name = request.POST.get("name")
+        user_obj = request.user
+        user_obj.first_name = name
+        user_obj.save()
+        bio = request.POST.get("bio")
+        userinfo_obj.bio = bio
+        userinfo_obj.save()
+        try:
+            user_obj = User.objects.get(username = username)
+            return redirect("/editprofile/")
+        except Exception as e:
+            user_obj = request.user
+            user_obj.username = username
+            user_obj.save()
+
+            return redirect('/profile/')
+        pass
+    context = {
+        'userinfo_obj':userinfo_obj,
+        'all_posts':all_posts,
+    }
+    return render(request,'editprofile.html',context)
+
+
+
+def deletepost(request,pk):
+    post = Post.objects.get(pk=int(pk))
+    post.delete()
+    userinfo_obj = UserInfo.objects.get(user=request.user)
+    userinfo_obj.no_of_posts = userinfo_obj.no_of_posts - 1
+    userinfo_obj.save()
+    return redirect("/editprofile/")
 
 
 def test(request):

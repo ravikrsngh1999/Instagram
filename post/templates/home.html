@@ -29,7 +29,7 @@
       <div class="">
 
         <div class="menu-box" id="menu-box">
-          <a href="#">Profile</a>
+          <a href="/profile/">Profile</a>
           <a href="#">Saved</a>
           <a href="/user_logout">Logout</a>
 
@@ -58,6 +58,7 @@
 
         </div>
 
+        {% for obj in all_posts %}
         <div class="post-container">
 
           <div class="post-header">
@@ -84,10 +85,10 @@
           </div>
 
           <div class="action-container">
-            <button type="button" name="button" class="like-btn"> <img src="img/like.png" alt=""> </button>
-            <button type="button" name="button"> <img src="img/comment.png" alt=""> </button>
-            <button type="button" name="button"> <img src="img/share.png" alt=""> </button>
-            <button type="button" name="button"> <img src="img/bookmark.png" alt=""> </button>
+            <button type="button" name="button" class="like-btn"> <img src="{% static 'img/like.png' %}" alt=""> </button>
+            <button type="button" name="button"> <img src="{% static 'img/comment.png' %}" alt=""> </button>
+            <button type="button" name="button"> <img src="{% static 'img/share.png' %}" alt=""> </button>
+            <button type="button" name="button"> <img src="{% static 'img/bookmark.png' %}" alt=""> </button>
 
           </div>
 
@@ -104,7 +105,7 @@
           </form>
 
         </div>
-
+        {% endfor %}
 
 
       </div>

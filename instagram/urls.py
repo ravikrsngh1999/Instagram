@@ -27,6 +27,10 @@ urlpatterns = [
     path('test/',views.test,name="test"),
     path('explore/',vv.explore,name="explore"),
     path('user_logout/',views.user_logout,name="user_logout"),
+    path('profile/',views.profile,name="profile"),
+    path('editprofile/',views.editprofile,name="editprofile"),
+    path('deletepost/<int:pk>/',views.deletepost,name="deletepost"),
+    path('getpostdetails/',vv.getpostdetails,name="getpostdetails"),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

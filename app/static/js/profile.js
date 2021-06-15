@@ -18,8 +18,21 @@ document.addEventListener('keydown', function (e) {
 	if (e.key === 'Escape') hidePost();
 });
 
-function showPost() {
+function showPost(e) {
 	postModal.style.display = 'flex';
+	var postid = e.target.getAttribute('data-catid')
+	$.ajax({
+		type:"GET",
+		url:"/getpostdetails/",
+		data: {
+			postid:postid,
+		},
+		success: function(data){
+			document.getElementById('modal-post-content').src= "/media/" + data[0]
+			document.getElementById('modal-username').innerText = data[1]
+			document.getElementById('modal-caption').innerHTML = "<a href=\"\">"+data[1]+"</a>" + data[2]
+		}
+	})
 	document.body.style.overflowY = 'hidden';
 }
 
